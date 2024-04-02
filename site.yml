@@ -57,10 +57,10 @@
         name: httpd
         enabled: yes
 
-    - name: Ensure Apache service is running
-      service:
-        name: httpd
-        state: started
+    # - name: Ensure Apache service is running
+    #   service:
+    #     name: httpd
+    #     state: started
         # enabled: true
 
     - name: Copy Apache configuration file
