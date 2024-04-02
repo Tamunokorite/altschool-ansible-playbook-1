@@ -95,12 +95,12 @@
 
   handlers:
     - name: Restart Firewalld
-      service:
+      systemd:
         name: firewalld 
         state: restarted
         enabled: yes
     - name: Restart Apache
-      service:
+      systemd:
         name: httpd 
         state: restarted
         enabled: yes
