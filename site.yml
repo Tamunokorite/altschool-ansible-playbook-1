@@ -56,7 +56,7 @@
       service:
         name: httpd
         state: started
-        enabled: true
+        # enabled: true
 
     - name: Copy Apache configuration file
       template:
