@@ -1,0 +1,12 @@
+Listen 80
+
+<Directory /var/www/html>
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+
+<IfModule mod_php7.c>
+    # Other PHP configurations...
+    php_value date.timezone "Africa/Lagos"
+</IfModule>
