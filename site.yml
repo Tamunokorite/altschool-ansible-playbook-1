@@ -1,12 +1,12 @@
 ---
-- name: Deploy Open Source App with Apache
-  hosts: all
+- name: Deploy Open Source App on Ubuntu with Apache
+  hosts: master, slave1
   become: true
   vars_files:
     - vars/main.yml
   tasks:
     - name: Install Apache
-      package:
+      apt:
         name: apache2
         state: present
 
@@ -23,9 +23,10 @@
       notify: Restart Apache
 
     - name: Install dependencies
-      package:
-        name: "{{ app_dependencies }}"
+      apt:
+        name: "{{ item }}"
         state: present
+      loop: "{{ app_dependencies  }}"
 
     - name: Deploy the app
       git:
@@ -33,3 +34,40 @@
         dest: "{{ app_dest }}"
         version: "{{ app_version }}"
       notify: Restart Apache
+
+- name: Deploy Open Source App on Cent OS with Apache
+  hosts: slave2
+  become: true
+  vars_files:
+    - vars/main.yml
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: present
+
+    - name: Ensure Apache service is running
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Copy Apache configuration file
+      template:
+        src: apache.conf.j2
+        dest: /etc/httpd/conf/httpd.conf
+      notify: Restart Apache
+
+    - name: Install dependencies
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ app_dependencies  }}"
+
+    - name: Deploy the app
+      git:
+        repo: "{{ app_repo }}"
+        dest: "{{ app_dest }}"
+        version: "{{ app_version }}"
+      notify: Restart Apache
+
