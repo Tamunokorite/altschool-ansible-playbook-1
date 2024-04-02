@@ -70,6 +70,17 @@
         state: present
       loop: "{{ app_dependencies  }}"
 
+    - name: Install Firewalld
+      yum:
+        name: firewalld
+        state: present
+
+    - name: Ensure Firewalld is running
+      service: 
+        name: firewalld
+        state: started
+        enabled: yes
+
     - name: Deploy the app
       git:
         repo: "{{ app_repo }}"
@@ -78,6 +89,11 @@
       notify: Restart Apache
 
   handlers:
+  - name: Restart Firewalld
+      service:
+        name: firewalld 
+        state: restarted
+        enabled: yes
     - name: Restart Apache
       service:
         name: httpd 
