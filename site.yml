@@ -89,7 +89,7 @@
       notify: Restart Apache
 
   handlers:
-  - name: Restart Firewalld
+    - name: Restart Firewalld
       service:
         name: firewalld 
         state: restarted
