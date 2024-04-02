@@ -52,6 +52,11 @@
         name: httpd
         state: present
 
+    - name: Enable Apache service
+      systemd:
+        name: httpd
+        enabled: yes
+
     - name: Ensure Apache service is running
       service:
         name: httpd
