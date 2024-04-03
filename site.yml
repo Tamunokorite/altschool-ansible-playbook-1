@@ -40,6 +40,7 @@
       service:
         name: apache2 
         state: restarted
+        enabled: true
 
 - name: Deploy Open Source App on Cent OS with Apache
   hosts: slave2
