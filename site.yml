@@ -15,7 +15,7 @@
         state: present
 
     - name: Ensure Apache service is running
-      service:
+      systemd:
         name: apache2
         state: started
         enabled: true
