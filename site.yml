@@ -4,6 +4,10 @@
   become: true
   vars_files:
     - vars/main.yml
+  pre_tasks:
+    - name: Update packages
+      apt:
+        update_cache: yes
   tasks:
     - name: Install Apache
       apt:
@@ -47,6 +51,11 @@
   become: true
   vars_files:
     - vars/main.yml
+  pre_tasks:
+    - name: Update yum cache
+      yum:
+        name: '*'
+        state: latest
   tasks:
     - name: Install Apache
       yum:
