@@ -1,6 +1,6 @@
 ---
 app_dependencies: 
   - php
-app_repo: https://github.com/Tamunokorite/altschool-php-sample.git
+app_repo: https://github.com/Tamunokorite/altschool-sem1-assignment3.git
 app_dest: /var/www/html/sample_site
 app_version: main
