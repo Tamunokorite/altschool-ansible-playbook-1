@@ -14,22 +14,17 @@
         name: apache2
         state: present
 
-    - name: Install Apache MPM Prefork
-      apt:
-        name: apache2-mpm-prefork
-        state: present
-
     - name: Ensure Apache service is running
       systemd:
         name: apache2
         state: started
         enabled: true
 
-    # - name: Copy Apache configuration file
-    #   template:
-    #     src: apache.conf.j2
-    #     dest: /etc/apache2/apache2.conf
-    #   notify: Restart Apache
+    - name: Copy Apache configuration file
+      template:
+        src: apache.conf.j2
+        dest: /etc/apache2/apache2.conf
+      notify: Restart Apache
 
     - name: Install dependencies
       apt:
@@ -67,15 +62,6 @@
         name: httpd
         state: present
 
-    - name: Install Apache MPM Worker
-      yum:
-        name: httpd
-        state: present
-
-    - name: Enable Apache MPM Worker
-      command: a2enmod mpm_worker
-
-
     - name: Enable Apache service
       systemd:
         name: httpd
@@ -87,11 +73,11 @@
     #     state: started
         # enabled: true
 
-    # - name: Copy Apache configuration file
-    #   template:
-    #     src: apache.conf.j2
-    #     dest: /etc/httpd/conf/httpd.conf
-    #   notify: Restart Apache
+    - name: Copy Apache configuration file
+      template:
+        src: apache.conf.j2
+        dest: /etc/httpd/conf/httpd.conf
+      notify: Restart Apache
 
     - name: Install dependencies
       yum:
