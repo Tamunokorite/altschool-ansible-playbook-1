@@ -14,6 +14,11 @@
         name: apache2
         state: present
 
+    - name: Install Apache MPM Prefork
+      apt:
+        name: apache2-mpm-prefork
+        state: present
+
     - name: Ensure Apache service is running
       systemd:
         name: apache2
@@ -61,6 +66,15 @@
       yum:
         name: httpd
         state: present
+
+    - name: Install Apache MPM Worker
+      yum:
+        name: httpd
+        state: present
+
+    - name: Enable Apache MPM Worker
+      command: a2enmod mpm_worker
+
 
     - name: Enable Apache service
       systemd:
