@@ -16,12 +16,6 @@
         state: started
         enabled: true
 
-    # - name: Copy Apache configuration file
-    #   template:
-    #     src: apache.conf.j2
-    #     dest: /etc/apache2/apache2.conf
-    #   notify: Restart Apache
-
     - name: Install dependencies
       apt:
         name: "{{ item }}"
@@ -57,18 +51,6 @@
       systemd:
         name: httpd
         enabled: yes
-
-    # - name: Ensure Apache service is running
-    #   service:
-    #     name: httpd
-    #     state: started
-        # enabled: true
-
-    # - name: Copy Apache configuration file
-    #   template:
-    #     src: apache.conf.j2
-    #     dest: /etc/httpd/conf/httpd.conf
-    #   notify: Restart Apache
 
     - name: Install dependencies
       yum:
